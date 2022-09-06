@@ -35,4 +35,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
+
+    @ExceptionHandler(PizzaNotFoundException.class)
+    public ResponseEntity<ErrorMessage> pizzaNotFoundException(PizzaNotFoundException exception, WebRequest request) {
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
 }
