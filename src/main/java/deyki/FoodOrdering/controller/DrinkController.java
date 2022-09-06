@@ -42,4 +42,26 @@ public class DrinkController {
 
         return ResponseEntity.status(HttpStatus.OK).body(drinkService.getDrinkById(drinkId));
     }
+
+    @GetMapping("/getDrinkByName/{name}")
+    public ResponseEntity<DrinkResponseModel> getDrinkByName(@PathVariable String name) throws DrinkNotFoundException {
+
+        return ResponseEntity.status(HttpStatus.OK).body(drinkService.getDrinkByName(name));
+    }
+
+    @DeleteMapping("/deleteById/{drinkId}")
+    public ResponseEntity<String> deleteDrinkById(@PathVariable Long drinkId) throws DrinkNotFoundException {
+
+        drinkService.deleteDrinkById(drinkId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Drink with id: %d deleted!", drinkId));
+    }
+
+    @DeleteMapping("/deleteByName")
+    public ResponseEntity<String> deleteDrinkByName(@RequestBody DrinkBindingModel drinkBindingModel) throws DrinkNotFoundException {
+
+        drinkService.deleteDrinkByName(drinkBindingModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Drink %s deleted!", drinkBindingModel.getDrink()));
+    }
 }
