@@ -13,4 +13,10 @@ public interface DrinkService {
     List<DrinkResponseModel> getAllDrinks();
 
     DrinkResponseModel getDrinkById(Long drinkId) throws DrinkNotFoundException;
+
+    DrinkResponseModel getDrinkByName(String drinkName) throws DrinkNotFoundException;
+
+    void deleteDrinkById(Long drinkId) throws DrinkNotFoundException;
+
+    void deleteDrinkByName(DrinkBindingModel drinkBindingModel) throws DrinkNotFoundException;
 }

@@ -51,4 +51,33 @@ public class DrinkServiceImpl implements DrinkService {
                 .map(drink -> modelMapper.map(drink, DrinkResponseModel.class))
                 .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink with id: %d not found!", drinkId)));
     }
+
+    @Override
+    public DrinkResponseModel getDrinkByName(String drinkName) throws DrinkNotFoundException {
+
+        return drinkRepository
+                .findByDrink(drinkName)
+                .map(drink -> modelMapper.map(drink, DrinkResponseModel.class))
+                .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink %s not found!", drinkName)));
+    }
+
+    @Override
+    public void deleteDrinkById(Long drinkId) throws DrinkNotFoundException {
+
+        Drink drink = drinkRepository
+                .findById(drinkId)
+                .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink with id: %d not found!", drinkId)));
+
+        drinkRepository.deleteById(drink.getDrinkId());
+    }
+
+    @Override
+    public void deleteDrinkByName(DrinkBindingModel drinkBindingModel) throws DrinkNotFoundException {
+
+        Drink drink = drinkRepository
+                .findByDrink(drinkBindingModel.getDrink())
+                .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink %s not found!", drinkBindingModel.getDrink())));
+
+        drinkRepository.delete(drink);
+    }
 }
