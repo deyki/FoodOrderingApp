@@ -31,4 +31,8 @@ public class Menu {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", referencedColumnName = "menuId")
     private List<MainDish> mainDishes;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id", referencedColumnName = "menuId")
+    private List<Dessert> desserts;
 }
