@@ -43,4 +43,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
+
+    @ExceptionHandler(MainDishNotFoundException.class)
+    public ResponseEntity<ErrorMessage> mainDishNotFoundException(MainDishNotFoundException exception, WebRequest request) {
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
 }
