@@ -25,6 +25,10 @@ public class Menu {
     private List<Drink> drinks;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id",referencedColumnName = "menuId")
+    @JoinColumn(name = "menu_id", referencedColumnName = "menuId")
     private List<Pizza> pizzas;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id", referencedColumnName = "menuId")
+    private List<MainDish> mainDishes;
 }
