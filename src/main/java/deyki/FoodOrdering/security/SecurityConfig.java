@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/menu/**").hasAuthority("ADMIN")
                 .antMatchers("/api/drink/**").hasAuthority("ADMIN")
                 .antMatchers("/api/pizza/**").hasAuthority("ADMIN")
+                .antMatchers("/api/mainDish/**").hasAuthority("ADMIN")
+                .antMatchers("/api/dessert/**").hasAuthority("ADMIN")
                 .and()
                 .userDetailsService(userService)
                 .exceptionHandling()
