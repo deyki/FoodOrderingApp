@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.controller;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
 import deyki.FoodOrdering.error.MainDishNotFoundException;
@@ -47,6 +48,14 @@ public class MainDishController {
     public ResponseEntity<MainDishResponseModel> getMainDishByName(@RequestBody MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException {
 
         return ResponseEntity.status(HttpStatus.OK).body(mainDishService.getMainDishByName(mainDishBindingModel));
+    }
+
+    @PutMapping("/updateQuantity")
+    public ResponseEntity<String> updateQuantity(@RequestBody QuantityBindingModel quantityBindingModel) throws MainDishNotFoundException {
+
+        mainDishService.updateQuantity(quantityBindingModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Quantity updated successfully!");
     }
 
     @DeleteMapping("/deleteMainDishById/{mainDishId}")

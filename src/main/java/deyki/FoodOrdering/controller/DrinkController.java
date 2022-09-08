@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.controller;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.drink.DrinkBindingModel;
 import deyki.FoodOrdering.domain.responseModel.drink.DrinkResponseModel;
 import deyki.FoodOrdering.error.DrinkNotFoundException;
@@ -47,6 +48,14 @@ public class DrinkController {
     public ResponseEntity<DrinkResponseModel> getDrinkByName(@PathVariable String name) throws DrinkNotFoundException {
 
         return ResponseEntity.status(HttpStatus.OK).body(drinkService.getDrinkByName(name));
+    }
+
+    @PutMapping("/updateQuantity")
+    public ResponseEntity<String> updateQuantity(@RequestBody QuantityBindingModel quantityBindingModel) throws DrinkNotFoundException {
+
+        drinkService.updateQuantity(quantityBindingModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Quantity updated successfully!");
     }
 
     @DeleteMapping("/deleteById/{drinkId}")

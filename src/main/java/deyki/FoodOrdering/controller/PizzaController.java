@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.controller;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.pizza.PizzaBindingModel;
 import deyki.FoodOrdering.domain.responseModel.pizza.PizzaResponseModel;
 import deyki.FoodOrdering.error.PizzaNotFoundException;
@@ -39,6 +40,14 @@ public class PizzaController {
     public ResponseEntity<PizzaResponseModel> getPizzaByName(@RequestBody PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException {
 
         return ResponseEntity.status(HttpStatus.OK).body(pizzaService.getPizzaByName(pizzaBindingModel));
+    }
+
+    @PutMapping("/updateQuantity")
+    public ResponseEntity<String> updateQuantity(@RequestBody QuantityBindingModel quantityBindingModel) throws PizzaNotFoundException {
+
+        pizzaService.updateQuantity(quantityBindingModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Quantity updated successfully!");
     }
 
     @DeleteMapping("/deletePizzaById/{pizzaId}")
