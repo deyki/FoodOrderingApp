@@ -1,6 +1,6 @@
 package deyki.FoodOrdering.service.impl;
 
-import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
+import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.drink.DrinkBindingModel;
 import deyki.FoodOrdering.domain.entity.Drink;
 import deyki.FoodOrdering.domain.responseModel.drink.DrinkResponseModel;

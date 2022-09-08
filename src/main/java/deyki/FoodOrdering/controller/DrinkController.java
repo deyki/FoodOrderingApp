@@ -1,6 +1,6 @@
 package deyki.FoodOrdering.controller;
 
-import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
+import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.drink.DrinkBindingModel;
 import deyki.FoodOrdering.domain.responseModel.drink.DrinkResponseModel;
 import deyki.FoodOrdering.error.DrinkNotFoundException;

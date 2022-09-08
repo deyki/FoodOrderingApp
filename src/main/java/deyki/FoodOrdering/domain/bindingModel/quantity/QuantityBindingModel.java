@@ -1,4 +1,4 @@
-package deyki.FoodOrdering.domain.bindingModel;
+package deyki.FoodOrdering.domain.bindingModel.quantity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

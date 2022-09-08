@@ -1,11 +1,10 @@
 package deyki.FoodOrdering.controller;
 
-import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
+import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.pizza.PizzaBindingModel;
 import deyki.FoodOrdering.domain.responseModel.pizza.PizzaResponseModel;
 import deyki.FoodOrdering.error.PizzaNotFoundException;
 import deyki.FoodOrdering.service.impl.PizzaServiceImpl;
-import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

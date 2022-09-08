@@ -1,13 +1,12 @@
 package deyki.FoodOrdering.service.impl;
 
-import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
+import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.entity.MainDish;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
 import deyki.FoodOrdering.error.MainDishNotFoundException;
 import deyki.FoodOrdering.repository.MainDishRepository;
 import deyki.FoodOrdering.service.MainDishService;
-import org.jboss.jandex.Main;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
