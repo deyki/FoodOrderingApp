@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class PizzaResponseModel {
 
     private String pizza;
+    private Integer quantity;
 }

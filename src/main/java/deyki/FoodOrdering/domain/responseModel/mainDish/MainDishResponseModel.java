@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class MainDishResponseModel {
 
     private String mainDish;
+    private Integer quantity;
 }
