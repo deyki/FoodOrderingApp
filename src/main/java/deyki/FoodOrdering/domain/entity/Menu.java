@@ -1,6 +1,5 @@
 package deyki.FoodOrdering.domain.entity;
 
-import deyki.FoodOrdering.controller.PizzaController;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
