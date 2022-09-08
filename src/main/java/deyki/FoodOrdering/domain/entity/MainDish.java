@@ -20,4 +20,7 @@ public class MainDish {
 
     @Column(name = "main_dish")
     private String mainDish;
+
+    @Column(name = "quantity")
+    private Integer quantity;
 }

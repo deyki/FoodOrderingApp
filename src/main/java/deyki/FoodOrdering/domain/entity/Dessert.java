@@ -20,4 +20,7 @@ public class Dessert {
 
     @Column(name = "dessert")
     private String dessert;
+
+    @Column(name = "quantity")
+    private Integer quantity;
 }
