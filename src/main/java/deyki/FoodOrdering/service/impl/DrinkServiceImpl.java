@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.service.impl;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.drink.DrinkBindingModel;
 import deyki.FoodOrdering.domain.entity.Drink;
 import deyki.FoodOrdering.domain.responseModel.drink.DrinkResponseModel;
@@ -60,6 +61,19 @@ public class DrinkServiceImpl implements DrinkService {
                 .map(drink -> modelMapper.map(drink, DrinkResponseModel.class))
                 .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink %s not found!", drinkName)));
     }
+
+    @Override
+    public void updateQuantity(QuantityBindingModel quantityBindingModel) throws DrinkNotFoundException {
+
+        Drink drink = drinkRepository
+                .findById(quantityBindingModel.getProductId())
+                .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink with id: %d not found!", quantityBindingModel.getProductId())));
+
+        drink.setQuantity(quantityBindingModel.getQuantity());
+
+        drinkRepository.save(drink);
+    }
+
 
     @Override
     public void deleteDrinkById(Long drinkId) throws DrinkNotFoundException {

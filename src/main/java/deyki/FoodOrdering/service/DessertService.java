@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.service;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.dessert.DessertBindingModel;
 import deyki.FoodOrdering.domain.responseModel.dessert.DessertResponseModel;
 import deyki.FoodOrdering.error.DessertNotFoundException;
@@ -15,6 +16,8 @@ public interface DessertService {
     DessertResponseModel getDessertById(Long dessertId) throws DessertNotFoundException;
 
     DessertResponseModel getDessertByName(DessertBindingModel dessertBindingModel) throws DessertNotFoundException;
+
+    void updateQuantity(QuantityBindingModel quantityBindingModel) throws DessertNotFoundException;
 
     void deleteDessertById(Long dessertId) throws DessertNotFoundException;
 

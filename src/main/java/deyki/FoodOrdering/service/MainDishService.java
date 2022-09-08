@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.service;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
 import deyki.FoodOrdering.error.MainDishNotFoundException;
@@ -15,6 +16,8 @@ public interface MainDishService {
     MainDishResponseModel getMainDishById(Long mainDishId) throws MainDishNotFoundException;
 
     MainDishResponseModel getMainDishByName(MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException;
+
+    void updateQuantity(QuantityBindingModel quantityBindingModel) throws MainDishNotFoundException;
 
     void deleteMainDishById(Long mainDishId) throws MainDishNotFoundException;
 

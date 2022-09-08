@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.service.impl;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.entity.MainDish;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
@@ -60,6 +61,18 @@ public class MainDishServiceImpl implements MainDishService {
                 .findByName(mainDishBindingModel.getMainDish())
                 .map(mainDish -> modelMapper.map(mainDish, MainDishResponseModel.class))
                 .orElseThrow(() -> new MainDishNotFoundException(String.format("Main dish %s not found!", mainDishBindingModel.getMainDish())));
+    }
+
+    @Override
+    public void updateQuantity(QuantityBindingModel quantityBindingModel) throws MainDishNotFoundException {
+
+        MainDish mainDish = mainDishRepository
+                .findById(quantityBindingModel.getProductId())
+                .orElseThrow(() -> new MainDishNotFoundException(String.format("Main dish with id: %d not found!", quantityBindingModel.getProductId())));
+
+        mainDish.setQuantity(quantityBindingModel.getQuantity());
+
+        mainDishRepository.save(mainDish);
     }
 
     @Override

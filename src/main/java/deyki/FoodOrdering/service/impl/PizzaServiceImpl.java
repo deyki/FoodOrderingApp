@@ -1,5 +1,6 @@
 package deyki.FoodOrdering.service.impl;
 
+import deyki.FoodOrdering.domain.bindingModel.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.pizza.PizzaBindingModel;
 import deyki.FoodOrdering.domain.entity.Pizza;
 import deyki.FoodOrdering.domain.responseModel.pizza.PizzaResponseModel;
@@ -47,6 +48,18 @@ public class PizzaServiceImpl implements PizzaService {
                 .findByName(pizzaBindingModel.getPizza())
                 .map(pizza -> modelMapper.map(pizza, PizzaResponseModel.class))
                 .orElseThrow(() -> new PizzaNotFoundException(String.format("Pizza %s not found!", pizzaBindingModel.getPizza())));
+    }
+
+    @Override
+    public void updateQuantity(QuantityBindingModel quantityBindingModel) throws PizzaNotFoundException {
+
+        Pizza pizza = pizzaRepository
+                .findById(quantityBindingModel.getProductId())
+                .orElseThrow(() -> new PizzaNotFoundException(String.format("Pizza with id: %d not found!", quantityBindingModel.getProductId())));
+
+        pizza.setQuantity(quantityBindingModel.getQuantity());
+
+        pizzaRepository.save(pizza);
     }
 
     @Override
