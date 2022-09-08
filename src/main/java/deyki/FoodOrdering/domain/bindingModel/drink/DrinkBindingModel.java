@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class DrinkBindingModel {
 
     private String drink;
+    private Integer quantity;
 }

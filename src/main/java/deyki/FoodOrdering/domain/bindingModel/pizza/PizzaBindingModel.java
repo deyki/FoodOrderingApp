@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class PizzaBindingModel {
 
     private String pizza;
+    private Integer quantity;
 }

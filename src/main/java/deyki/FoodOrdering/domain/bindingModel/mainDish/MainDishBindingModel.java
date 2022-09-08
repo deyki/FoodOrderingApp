@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class MainDishBindingModel {
 
     private String mainDish;
+    private Integer quantity;
 }
