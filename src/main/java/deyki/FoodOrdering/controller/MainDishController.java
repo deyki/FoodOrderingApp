@@ -43,10 +43,10 @@ public class MainDishController {
         return ResponseEntity.status(HttpStatus.OK).body(mainDishService.getMainDishById(mainDishId));
     }
 
-    @GetMapping("/getMainDishByName")
-    public ResponseEntity<MainDishResponseModel> getMainDishByName(@RequestBody MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException {
+    @GetMapping("/getMainDishByName/{mainDishName}")
+    public ResponseEntity<MainDishResponseModel> getMainDishByName(@PathVariable String mainDishName) throws MainDishNotFoundException {
 
-        return ResponseEntity.status(HttpStatus.OK).body(mainDishService.getMainDishByName(mainDishBindingModel));
+        return ResponseEntity.status(HttpStatus.OK).body(mainDishService.getMainDishByName(mainDishName));
     }
 
     @PutMapping("/updateQuantity")
@@ -65,11 +65,11 @@ public class MainDishController {
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Main dish with id: %d deleted!", mainDishId));
     }
 
-    @DeleteMapping("/deleteMainDishByName")
-    public ResponseEntity<String> deleteMainDishByName(@RequestBody MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException {
+    @DeleteMapping("/deleteMainDishByName/{mainDishName}")
+    public ResponseEntity<String> deleteMainDishByName(@PathVariable String mainDishName) throws MainDishNotFoundException {
 
-        mainDishService.deleteMainDishByName(mainDishBindingModel);
+        mainDishService.deleteMainDishByName(mainDishName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("Main dish %s deleted!", mainDishBindingModel.getMainDish()));
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Main dish %s deleted!", mainDishName));
     }
 }

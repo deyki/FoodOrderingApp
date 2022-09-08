@@ -54,12 +54,12 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
-    public DessertResponseModel getDessertByName(DessertBindingModel dessertBindingModel) throws DessertNotFoundException {
+    public DessertResponseModel getDessertByName(String dessertName) throws DessertNotFoundException {
 
         return dessertRepository
-                .findByName(dessertBindingModel.getDessert())
+                .findByName(dessertName)
                 .map(dessert -> modelMapper.map(dessert, DessertResponseModel.class))
-                .orElseThrow(() -> new DessertNotFoundException(String.format("Dessert %s not found!", dessertBindingModel.getDessert())));
+                .orElseThrow(() -> new DessertNotFoundException(String.format("Dessert %s not found!", dessertName)));
     }
 
     @Override
@@ -85,11 +85,11 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
-    public void deleteDessertByName(DessertBindingModel dessertBindingModel) throws DessertNotFoundException {
+    public void deleteDessertByName(String dessertName) throws DessertNotFoundException {
 
         Dessert dessert = dessertRepository
-                .findByName(dessertBindingModel.getDessert())
-                .orElseThrow(() -> new DessertNotFoundException(String.format("Dessert %s not found!", dessertBindingModel.getDessert())));
+                .findByName(dessertName)
+                .orElseThrow(() -> new DessertNotFoundException(String.format("Dessert %s not found!", dessertName)));
 
         dessertRepository.delete(dessert);
     }

@@ -15,11 +15,11 @@ public interface MainDishService {
 
     MainDishResponseModel getMainDishById(Long mainDishId) throws MainDishNotFoundException;
 
-    MainDishResponseModel getMainDishByName(MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException;
+    MainDishResponseModel getMainDishByName(String mainDishName) throws MainDishNotFoundException;
 
     void updateQuantity(QuantityBindingModel quantityBindingModel) throws MainDishNotFoundException;
 
     void deleteMainDishById(Long mainDishId) throws MainDishNotFoundException;
 
-    void deleteMainDishByName(MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException;
+    void deleteMainDishByName(String mainDishName) throws MainDishNotFoundException;
 }

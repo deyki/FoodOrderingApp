@@ -42,12 +42,12 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public PizzaResponseModel getPizzaByName(PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException {
+    public PizzaResponseModel getPizzaByName(String pizzaName) throws PizzaNotFoundException {
 
         return pizzaRepository
-                .findByName(pizzaBindingModel.getPizza())
+                .findByName(pizzaName)
                 .map(pizza -> modelMapper.map(pizza, PizzaResponseModel.class))
-                .orElseThrow(() -> new PizzaNotFoundException(String.format("Pizza %s not found!", pizzaBindingModel.getPizza())));
+                .orElseThrow(() -> new PizzaNotFoundException(String.format("Pizza %s not found!", pizzaName)));
     }
 
     @Override
@@ -73,11 +73,11 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public void deletePizzaByName(PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException {
+    public void deletePizzaByName(String pizzaName) throws PizzaNotFoundException {
 
         Pizza pizza = pizzaRepository
-                .findByName(pizzaBindingModel.getPizza())
-                .orElseThrow(() -> new PizzaNotFoundException(String.format("Pizza %s not found!", pizzaBindingModel.getPizza())));
+                .findByName(pizzaName)
+                .orElseThrow(() -> new PizzaNotFoundException(String.format("Pizza %s not found!", pizzaName)));
 
         pizzaRepository.delete(pizza);
     }

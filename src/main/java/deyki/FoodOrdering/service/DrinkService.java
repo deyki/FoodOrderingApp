@@ -21,5 +21,5 @@ public interface DrinkService {
 
     void deleteDrinkById(Long drinkId) throws DrinkNotFoundException;
 
-    void deleteDrinkByName(DrinkBindingModel drinkBindingModel) throws DrinkNotFoundException;
+    void deleteDrinkByName(String drinkName) throws DrinkNotFoundException;
 }

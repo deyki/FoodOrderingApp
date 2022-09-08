@@ -54,12 +54,12 @@ public class MainDishServiceImpl implements MainDishService {
     }
 
     @Override
-    public MainDishResponseModel getMainDishByName(MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException {
+    public MainDishResponseModel getMainDishByName(String mainDishName) throws MainDishNotFoundException {
 
         return mainDishRepository
-                .findByName(mainDishBindingModel.getMainDish())
+                .findByName(mainDishName)
                 .map(mainDish -> modelMapper.map(mainDish, MainDishResponseModel.class))
-                .orElseThrow(() -> new MainDishNotFoundException(String.format("Main dish %s not found!", mainDishBindingModel.getMainDish())));
+                .orElseThrow(() -> new MainDishNotFoundException(String.format("Main dish %s not found!", mainDishName)));
     }
 
     @Override
@@ -85,11 +85,11 @@ public class MainDishServiceImpl implements MainDishService {
     }
 
     @Override
-    public void deleteMainDishByName(MainDishBindingModel mainDishBindingModel) throws MainDishNotFoundException {
+    public void deleteMainDishByName(String mainDishName) throws MainDishNotFoundException {
 
         MainDish mainDish = mainDishRepository
-                .findByName(mainDishBindingModel.getMainDish())
-                .orElseThrow(() -> new MainDishNotFoundException(String.format("Main dish %s not found!", mainDishBindingModel.getMainDish())));
+                .findByName(mainDishName)
+                .orElseThrow(() -> new MainDishNotFoundException(String.format("Main dish %s not found!", mainDishName)));
 
         mainDishRepository.delete(mainDish);
     }

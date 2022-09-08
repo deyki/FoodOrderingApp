@@ -15,11 +15,11 @@ public interface DessertService {
 
     DessertResponseModel getDessertById(Long dessertId) throws DessertNotFoundException;
 
-    DessertResponseModel getDessertByName(DessertBindingModel dessertBindingModel) throws DessertNotFoundException;
+    DessertResponseModel getDessertByName(String dessertName) throws DessertNotFoundException;
 
     void updateQuantity(QuantityBindingModel quantityBindingModel) throws DessertNotFoundException;
 
     void deleteDessertById(Long dessertId) throws DessertNotFoundException;
 
-    void deleteDessertByName(DessertBindingModel dessertBindingModel) throws DessertNotFoundException;
+    void deleteDessertByName(String dessertName) throws DessertNotFoundException;
 }

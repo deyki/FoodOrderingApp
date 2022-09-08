@@ -35,10 +35,10 @@ public class PizzaController {
         return ResponseEntity.status(HttpStatus.OK).body(pizzaService.getPizzaById(pizzaId));
     }
 
-    @GetMapping("/getPizzaByName")
-    public ResponseEntity<PizzaResponseModel> getPizzaByName(@RequestBody PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException {
+    @GetMapping("/getPizzaByName/{pizzaName}")
+    public ResponseEntity<PizzaResponseModel> getPizzaByName(@PathVariable String pizzaName) throws PizzaNotFoundException {
 
-        return ResponseEntity.status(HttpStatus.OK).body(pizzaService.getPizzaByName(pizzaBindingModel));
+        return ResponseEntity.status(HttpStatus.OK).body(pizzaService.getPizzaByName(pizzaName));
     }
 
     @PutMapping("/updateQuantity")
@@ -57,11 +57,11 @@ public class PizzaController {
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Pizza with id: %d deleted!", pizzaId));
     }
 
-    @DeleteMapping("/deletePizzaByName")
-    public ResponseEntity<String> deletePizzaByName(@RequestBody PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException {
+    @DeleteMapping("/deletePizzaByName/{pizzaName}")
+    public ResponseEntity<String> deletePizzaByName(@PathVariable String pizzaName) throws PizzaNotFoundException {
 
-        pizzaService.deletePizzaByName(pizzaBindingModel);
+        pizzaService.deletePizzaByName(pizzaName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("Pizza %s deleted!", pizzaBindingModel.getPizza()));
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Pizza %s deleted!", pizzaName));
     }
 }

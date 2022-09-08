@@ -43,10 +43,10 @@ public class DessertController {
         return ResponseEntity.status(HttpStatus.OK).body(dessertService.getDessertById(dessertId));
     }
 
-    @GetMapping("/getDessertByName")
-    public ResponseEntity<DessertResponseModel> getDessertByName(@RequestBody DessertBindingModel dessertBindingModel) throws DessertNotFoundException {
+    @GetMapping("/getDessertByName/{dessertName}")
+    public ResponseEntity<DessertResponseModel> getDessertByName(@PathVariable String dessertName) throws DessertNotFoundException {
 
-        return ResponseEntity.status(HttpStatus.OK).body(dessertService.getDessertByName(dessertBindingModel));
+        return ResponseEntity.status(HttpStatus.OK).body(dessertService.getDessertByName(dessertName));
     }
 
     @PutMapping("/updateQuantity")
@@ -65,11 +65,11 @@ public class DessertController {
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Dessert with id: %d deleted!", dessertId));
     }
 
-    @DeleteMapping("/deleteDessertByName")
-    public ResponseEntity<String> deleteDessertByName(@RequestBody DessertBindingModel dessertBindingModel) throws DessertNotFoundException {
+    @DeleteMapping("/deleteDessertByName/{dessertName}")
+    public ResponseEntity<String> deleteDessertByName(@PathVariable String dessertName) throws DessertNotFoundException {
 
-        dessertService.deleteDessertByName(dessertBindingModel);
+        dessertService.deleteDessertByName(dessertName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("Dessert %s deleted!", dessertBindingModel.getDessert()));
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Dessert %s deleted!", dessertName));
     }
 }

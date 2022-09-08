@@ -11,11 +11,11 @@ public interface PizzaService {
 
     PizzaResponseModel getPizzaById(Long pizzaId) throws PizzaNotFoundException;
 
-    PizzaResponseModel getPizzaByName(PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException;
+    PizzaResponseModel getPizzaByName(String pizzaName) throws PizzaNotFoundException;
 
     void updateQuantity(QuantityBindingModel quantityBindingModel) throws PizzaNotFoundException;
 
     void deletePizzaById(Long pizzaId) throws PizzaNotFoundException;
 
-    void deletePizzaByName(PizzaBindingModel pizzaBindingModel) throws PizzaNotFoundException;
+    void deletePizzaByName(String pizzaName) throws PizzaNotFoundException;
 }

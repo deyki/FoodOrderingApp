@@ -86,11 +86,11 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public void deleteDrinkByName(DrinkBindingModel drinkBindingModel) throws DrinkNotFoundException {
+    public void deleteDrinkByName(String drinkName) throws DrinkNotFoundException {
 
         Drink drink = drinkRepository
-                .findByDrink(drinkBindingModel.getDrink())
-                .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink %s not found!", drinkBindingModel.getDrink())));
+                .findByDrink(drinkName)
+                .orElseThrow(() -> new DrinkNotFoundException(String.format("Drink %s not found!", drinkName)));
 
         drinkRepository.delete(drink);
     }

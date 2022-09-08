@@ -66,11 +66,11 @@ public class DrinkController {
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Drink with id: %d deleted!", drinkId));
     }
 
-    @DeleteMapping("/deleteByName")
-    public ResponseEntity<String> deleteDrinkByName(@RequestBody DrinkBindingModel drinkBindingModel) throws DrinkNotFoundException {
+    @DeleteMapping("/deleteByName/{drinkName}")
+    public ResponseEntity<String> deleteDrinkByName(@PathVariable String drinkName) throws DrinkNotFoundException {
 
-        drinkService.deleteDrinkByName(drinkBindingModel);
+        drinkService.deleteDrinkByName(drinkName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("Drink %s deleted!", drinkBindingModel.getDrink()));
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Drink %s deleted!", drinkName));
     }
 }
