@@ -19,6 +19,9 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_sequence")
     private Long menuId;
 
+    @Column(name = "menu_name")
+    private String name;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", referencedColumnName = "menuId")
     private List<Drink> drinks;
