@@ -20,14 +20,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
 
-    @ExceptionHandler(MenuNotInitialized.class)
-    public ResponseEntity<ErrorMessage> menuNotInitializedException(MenuNotInitialized exception, WebRequest request) {
-
-        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
-    }
-
     @ExceptionHandler(DrinkNotFoundException.class)
     public ResponseEntity<ErrorMessage> drinkNotFoundException(DrinkNotFoundException exception, WebRequest request) {
 
@@ -62,6 +54,22 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(SaladNotFoundException.class)
     public ResponseEntity<ErrorMessage> saladNotFoundException(SaladNotFoundException exception, WebRequest request) {
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
+
+    @ExceptionHandler(MenuAlreadyInitializedException.class)
+    public ResponseEntity<ErrorMessage> menuAlreadyInitializedException(MenuAlreadyInitializedException exception, WebRequest request) {
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
+
+    @ExceptionHandler(MenuNotInitializedException.class)
+    public ResponseEntity<ErrorMessage> menuNotInitializedException(MenuNotInitializedException exception, WebRequest request) {
 
         ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
 
