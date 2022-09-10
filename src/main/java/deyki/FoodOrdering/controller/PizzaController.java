@@ -3,6 +3,7 @@ package deyki.FoodOrdering.controller;
 import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.pizza.PizzaBindingModel;
 import deyki.FoodOrdering.domain.responseModel.pizza.PizzaResponseModel;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.error.PizzaNotFoundException;
 import deyki.FoodOrdering.service.impl.PizzaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class PizzaController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createPizza(@RequestBody PizzaBindingModel pizzaBindingModel) {
+    public ResponseEntity<String> createPizza(@RequestBody PizzaBindingModel pizzaBindingModel) throws MenuNotInitializedException {
 
         pizzaService.createPizza(pizzaBindingModel);
 

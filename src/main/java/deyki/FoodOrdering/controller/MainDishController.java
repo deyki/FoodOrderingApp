@@ -4,6 +4,7 @@ import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
 import deyki.FoodOrdering.error.MainDishNotFoundException;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.service.impl.MainDishServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class MainDishController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createMainDish(@RequestBody MainDishBindingModel mainDishBindingModel) {
+    public ResponseEntity<String> createMainDish(@RequestBody MainDishBindingModel mainDishBindingModel) throws MenuNotInitializedException {
 
         mainDishService.createMainDish(mainDishBindingModel);
 

@@ -4,6 +4,7 @@ import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.dessert.DessertBindingModel;
 import deyki.FoodOrdering.domain.responseModel.dessert.DessertResponseModel;
 import deyki.FoodOrdering.error.DessertNotFoundException;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.service.impl.DessertServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class DessertController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createDessert(@RequestBody DessertBindingModel dessertBindingModel) {
+    public ResponseEntity<String> createDessert(@RequestBody DessertBindingModel dessertBindingModel) throws MenuNotInitializedException {
 
         dessertService.createDessert(dessertBindingModel);
 

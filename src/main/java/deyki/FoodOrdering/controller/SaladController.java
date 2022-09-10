@@ -4,6 +4,7 @@ import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.salad.SaladBindingModel;
 import deyki.FoodOrdering.domain.entity.Salad;
 import deyki.FoodOrdering.domain.responseModel.salad.SaladResponseModel;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.error.SaladNotFoundException;
 import deyki.FoodOrdering.repository.SaladRepository;
 import deyki.FoodOrdering.service.impl.SaladServiceImpl;
@@ -24,7 +25,7 @@ public class SaladController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createSalad(@RequestBody SaladBindingModel saladBindingModel) {
+    public ResponseEntity<String> createSalad(@RequestBody SaladBindingModel saladBindingModel) throws MenuNotInitializedException {
 
         saladService.createSalad(saladBindingModel);
 
