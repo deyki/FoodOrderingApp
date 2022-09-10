@@ -2,9 +2,12 @@ package deyki.FoodOrdering.service.impl;
 
 import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.pizza.PizzaBindingModel;
+import deyki.FoodOrdering.domain.entity.Menu;
 import deyki.FoodOrdering.domain.entity.Pizza;
 import deyki.FoodOrdering.domain.responseModel.pizza.PizzaResponseModel;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.error.PizzaNotFoundException;
+import deyki.FoodOrdering.repository.MenuRepository;
 import deyki.FoodOrdering.repository.PizzaRepository;
 import deyki.FoodOrdering.service.PizzaService;
 import org.modelmapper.ModelMapper;
@@ -15,19 +18,27 @@ import org.springframework.stereotype.Service;
 public class PizzaServiceImpl implements PizzaService {
 
     private final PizzaRepository pizzaRepository;
+    private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PizzaServiceImpl(PizzaRepository pizzaRepository, ModelMapper modelMapper) {
+    public PizzaServiceImpl(PizzaRepository pizzaRepository, MenuRepository menuRepository, ModelMapper modelMapper) {
         this.pizzaRepository = pizzaRepository;
+        this.menuRepository = menuRepository;
         this.modelMapper = modelMapper;
     }
 
 
     @Override
-    public void createPizza(PizzaBindingModel pizzaBindingModel) {
+    public void createPizza(PizzaBindingModel pizzaBindingModel) throws MenuNotInitializedException {
 
         Pizza pizza = modelMapper.map(pizzaBindingModel, Pizza.class);
+
+        Menu menu = menuRepository
+                .findById(1L)
+                .orElseThrow(() -> new MenuNotInitializedException("Menu is not initialized!"));
+
+        menu.getPizzas().add(pizza);
 
         pizzaRepository.save(pizza);
     }

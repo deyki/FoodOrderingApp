@@ -2,9 +2,12 @@ package deyki.FoodOrdering.service.impl;
 
 import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.salad.SaladBindingModel;
+import deyki.FoodOrdering.domain.entity.Menu;
 import deyki.FoodOrdering.domain.entity.Salad;
 import deyki.FoodOrdering.domain.responseModel.salad.SaladResponseModel;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.error.SaladNotFoundException;
+import deyki.FoodOrdering.repository.MenuRepository;
 import deyki.FoodOrdering.repository.SaladRepository;
 import deyki.FoodOrdering.service.SaladService;
 import org.modelmapper.ModelMapper;
@@ -18,18 +21,26 @@ import java.util.stream.Collectors;
 public class SaladServiceImpl implements SaladService {
 
     private final SaladRepository saladRepository;
+    private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public SaladServiceImpl(SaladRepository saladRepository, ModelMapper modelMapper) {
+    public SaladServiceImpl(SaladRepository saladRepository, MenuRepository menuRepository, ModelMapper modelMapper) {
         this.saladRepository = saladRepository;
+        this.menuRepository = menuRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public void createSalad(SaladBindingModel saladBindingModel) {
+    public void createSalad(SaladBindingModel saladBindingModel) throws MenuNotInitializedException {
 
         Salad salad = modelMapper.map(saladBindingModel, Salad.class);
+
+        Menu menu = menuRepository
+                .findById(1L)
+                .orElseThrow(() -> new MenuNotInitializedException("Menu is not initialized!"));
+
+        menu.getSalads().add(salad);
 
         saladRepository.save(salad);
     }

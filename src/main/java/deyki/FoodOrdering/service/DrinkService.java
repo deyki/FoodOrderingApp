@@ -4,12 +4,13 @@ import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.drink.DrinkBindingModel;
 import deyki.FoodOrdering.domain.responseModel.drink.DrinkResponseModel;
 import deyki.FoodOrdering.error.DrinkNotFoundException;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 
 import java.util.List;
 
 public interface DrinkService {
 
-    void createDrink(DrinkBindingModel drinkBindingModel);
+    void createDrink(DrinkBindingModel drinkBindingModel) throws MenuNotInitializedException;
 
     List<DrinkResponseModel> getAllDrinks();
 

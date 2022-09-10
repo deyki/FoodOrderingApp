@@ -3,9 +3,12 @@ package deyki.FoodOrdering.service.impl;
 import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.drink.DrinkBindingModel;
 import deyki.FoodOrdering.domain.entity.Drink;
+import deyki.FoodOrdering.domain.entity.Menu;
 import deyki.FoodOrdering.domain.responseModel.drink.DrinkResponseModel;
 import deyki.FoodOrdering.error.DrinkNotFoundException;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.repository.DrinkRepository;
+import deyki.FoodOrdering.repository.MenuRepository;
 import deyki.FoodOrdering.service.DrinkService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +21,26 @@ import java.util.stream.Collectors;
 public class DrinkServiceImpl implements DrinkService {
 
     private final DrinkRepository drinkRepository;
+    private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public DrinkServiceImpl(DrinkRepository drinkRepository, ModelMapper modelMapper) {
+    public DrinkServiceImpl(DrinkRepository drinkRepository, MenuRepository menuRepository, ModelMapper modelMapper) {
         this.drinkRepository = drinkRepository;
+        this.menuRepository = menuRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public void createDrink(DrinkBindingModel drinkBindingModel) {
+    public void createDrink(DrinkBindingModel drinkBindingModel) throws MenuNotInitializedException {
 
         Drink drink = modelMapper.map(drinkBindingModel, Drink.class);
+
+        Menu menu = menuRepository
+                .findById(1L)
+                .orElseThrow(() -> new MenuNotInitializedException("Menu is not initialized!"));
+
+        menu.getDrinks().add(drink);
 
         drinkRepository.save(drink);
     }

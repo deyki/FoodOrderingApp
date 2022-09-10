@@ -4,12 +4,13 @@ import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
 import deyki.FoodOrdering.error.MainDishNotFoundException;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 
 import java.util.List;
 
 public interface MainDishService {
 
-    void createMainDish(MainDishBindingModel mainDishBindingModel);
+    void createMainDish(MainDishBindingModel mainDishBindingModel) throws MenuNotInitializedException;
 
     List<MainDishResponseModel> getAllMainDishes();
 

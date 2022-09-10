@@ -3,9 +3,12 @@ package deyki.FoodOrdering.service.impl;
 import deyki.FoodOrdering.domain.bindingModel.quantity.QuantityBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.mainDish.MainDishBindingModel;
 import deyki.FoodOrdering.domain.entity.MainDish;
+import deyki.FoodOrdering.domain.entity.Menu;
 import deyki.FoodOrdering.domain.responseModel.mainDish.MainDishResponseModel;
 import deyki.FoodOrdering.error.MainDishNotFoundException;
+import deyki.FoodOrdering.error.MenuNotInitializedException;
 import deyki.FoodOrdering.repository.MainDishRepository;
+import deyki.FoodOrdering.repository.MenuRepository;
 import deyki.FoodOrdering.service.MainDishService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +21,26 @@ import java.util.stream.Collectors;
 public class MainDishServiceImpl implements MainDishService {
 
     private final MainDishRepository mainDishRepository;
+    private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public MainDishServiceImpl(MainDishRepository mainDishRepository, ModelMapper modelMapper) {
+    public MainDishServiceImpl(MainDishRepository mainDishRepository, MenuRepository menuRepository, ModelMapper modelMapper) {
         this.mainDishRepository = mainDishRepository;
+        this.menuRepository = menuRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public void createMainDish(MainDishBindingModel mainDishBindingModel) {
+    public void createMainDish(MainDishBindingModel mainDishBindingModel) throws MenuNotInitializedException {
 
         MainDish mainDish = modelMapper.map(mainDishBindingModel, MainDish.class);
+
+        Menu menu = menuRepository
+                .findById(1L)
+                .orElseThrow(() -> new MenuNotInitializedException("Menu is not initialized!"));
+
+        menu.getMainDishes().add(mainDish);
 
         mainDishRepository.save(mainDish);
     }
