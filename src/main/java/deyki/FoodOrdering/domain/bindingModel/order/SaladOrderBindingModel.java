@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SaladOrderBindingModel {
 
+    private String deliveryAddress;
     private String salad;
 }

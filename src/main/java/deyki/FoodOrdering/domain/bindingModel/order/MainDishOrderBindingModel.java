@@ -10,5 +10,6 @@ import org.checkerframework.checker.initialization.qual.NotOnlyInitialized;
 @NoArgsConstructor
 public class MainDishOrderBindingModel {
 
+    private String deliveryAddress;
     private String mainDish;
 }
