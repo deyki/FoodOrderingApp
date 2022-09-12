@@ -39,6 +39,7 @@ public interface OrderService {
 
     List<DessertOrderResponseModel> getListOfActiveDessertOrders();
 
+    List<OrderResponseModel> getListOfActiveOrders();
     List<Order> getListOfNonActiveOrders();
 
     Order getOrderById(Long orderId) throws OrderNotFoundException;

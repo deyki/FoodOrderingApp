@@ -208,6 +208,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderResponseModel> getListOfActiveOrders() {
+
+        return orderRepository
+                .findAllActiveOrders()
+                .stream()
+                .map(order -> modelMapper.map(order, OrderResponseModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Order> getListOfNonActiveOrders() {
 
         return orderRepository.findAllNonActiveOrders();
