@@ -33,4 +33,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT o FROM Order o WHERE o.active = false")
     List<Order> findAllNonActiveOrders();
+
+    @Query("SELECT o FROM Order o WHERE o.active = true")
+    List<Order> findAllActiveOrders();
 }
