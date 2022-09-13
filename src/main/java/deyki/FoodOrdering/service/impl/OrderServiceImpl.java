@@ -3,12 +3,14 @@ package deyki.FoodOrdering.service.impl;
 import deyki.FoodOrdering.domain.bindingModel.order.*;
 import deyki.FoodOrdering.domain.entity.Order;
 import deyki.FoodOrdering.domain.entity.User;
+import deyki.FoodOrdering.domain.entity.UserProfileDetails;
 import deyki.FoodOrdering.domain.enums.OrderType;
 import deyki.FoodOrdering.domain.responseModel.order.*;
 import deyki.FoodOrdering.domain.responseModel.user.UserResponseModel;
 import deyki.FoodOrdering.error.OrderNotFoundException;
 import deyki.FoodOrdering.error.UserNotFoundException;
 import deyki.FoodOrdering.repository.OrderRepository;
+import deyki.FoodOrdering.repository.UserProfileDetailsRepository;
 import deyki.FoodOrdering.repository.UserRepository;
 import deyki.FoodOrdering.service.OrderService;
 import org.modelmapper.ModelMapper;
@@ -23,12 +25,14 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final UserProfileDetailsRepository userProfileDetailsRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, UserProfileDetailsRepository userProfileDetailsRepository, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.userProfileDetailsRepository = userProfileDetailsRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -39,11 +43,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(fullOrderBindingModel, Order.class);
         order.setUser(user);
         order.setActive(true);
         order.setOrderType(OrderType.FullOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
@@ -54,11 +63,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(mixedOrderBindingModel, Order.class);
         order.setActive(true);
         order.setUser(user);
         order.setOrderType(OrderType.MixedOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
@@ -69,11 +83,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(drinkOrderBindingModel, Order.class);
         order.setUser(user);
         order.setActive(true);
         order.setOrderType(OrderType.DrinkOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
@@ -84,11 +103,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(pizzaOrderBindingModel, Order.class);
         order.setActive(true);
         order.setUser(user);
         order.setOrderType(OrderType.PizzaOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
@@ -99,11 +123,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(mainDishOrderBindingModel, Order.class);
         order.setActive(true);
         order.setUser(user);
         order.setOrderType(OrderType.MainDishOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
@@ -114,11 +143,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(saladOrderBindingModel, Order.class);
         order.setActive(true);
         order.setUser(user);
         order.setOrderType(OrderType.SaladOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
@@ -129,11 +163,16 @@ public class OrderServiceImpl implements OrderService {
                 .findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
 
+        UserProfileDetails userProfileDetails = user.getUserProfileDetails();
+        Integer points = userProfileDetails.getPoints() + 1;
+        userProfileDetails.setPoints(points);
+
         Order order = modelMapper.map(dessertOrderBindingModel, Order.class);
         order.setActive(true);
         order.setUser(user);
         order.setOrderType(OrderType.DessertOrder);
 
+        userProfileDetailsRepository.save(userProfileDetails);
         orderRepository.save(order);
     }
 
