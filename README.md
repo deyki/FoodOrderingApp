@@ -1,6 +1,6 @@
 # FoodOrderingApp
-Food ordering app with Java &amp; Spring-boot
 
 # Info
 
-* Not finished.
+* Tech-stack: Java, Spring-boot, Spring-data-jpa, PostgreSQL.
+
