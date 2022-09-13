@@ -29,6 +29,10 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     private Set<Role> authorities;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_details_id", referencedColumnName = "userDetailsId")
+    private UserProfileDetails userProfileDetails;
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
