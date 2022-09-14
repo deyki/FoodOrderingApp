@@ -100,4 +100,14 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
 
         userProfileDetailsRepository.save(userProfileDetails);
     }
+
+    @Override
+    public String getPointsById(Long userId) throws UserProfileDetailsNotFoundException {
+
+        UserProfileDetails userProfileDetails = userProfileDetailsRepository
+                .findByUserId(userId)
+                .orElseThrow(() -> new UserProfileDetailsNotFoundException(String.format("User details with user id: %d not found!", userId)));
+
+        return String.format("Your points: %d", userProfileDetails.getPoints());
+    }
 }

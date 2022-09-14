@@ -18,4 +18,6 @@ public interface UserProfileDetailsService {
     UserProfileDetailsResponseModel getUserProfileDetailsByPhoneNumber(PhoneNumberBindingModel phoneNumberBindingModel) throws UserProfileDetailsNotFoundException;
 
     void updateUserProfileDetailsById(Long userDetailsId, UpdateDetailsBindingModel updateDetailsBindingModel) throws UserProfileDetailsNotFoundException;
+
+    String getPointsById(Long userId) throws UserProfileDetailsNotFoundException;
 }
