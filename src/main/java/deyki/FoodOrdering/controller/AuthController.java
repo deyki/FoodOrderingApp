@@ -2,6 +2,7 @@ package deyki.FoodOrdering.controller;
 
 import deyki.FoodOrdering.domain.bindingModel.user.UserBindingModel;
 import deyki.FoodOrdering.domain.responseModel.user.LoginResponseModel;
+import deyki.FoodOrdering.error.IncorrectPasswordException;
 import deyki.FoodOrdering.error.UserNotFoundException;
 import deyki.FoodOrdering.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseModel> login(@RequestBody UserBindingModel userBindingModel) throws UserNotFoundException {
+    public ResponseEntity<LoginResponseModel> login(@RequestBody UserBindingModel userBindingModel) throws UserNotFoundException, IncorrectPasswordException {
 
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(userBindingModel.getUsername(), userBindingModel.getPassword()));
