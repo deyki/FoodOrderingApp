@@ -16,4 +16,7 @@ public interface UserProfileDetailsRepository extends JpaRepository<UserProfileD
 
     @Query("SELECT u FROM UserProfileDetails u WHERE u.phoneNumber = ?1")
     Optional<UserProfileDetails> findByPhoneNumber(@Param("phoneNumber") Integer phoneNumber);
+
+    @Query("SELECT u FROM UserProfileDetails u WHERE u.user.userId = ?1")
+    Optional<UserProfileDetails> findByUserId(@Param("userId") Long userId);
 }
