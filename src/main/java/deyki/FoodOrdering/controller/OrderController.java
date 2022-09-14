@@ -155,4 +155,10 @@ public class OrderController {
 
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getUserInfoByOrderId(orderId));
     }
+
+    @DeleteMapping("/deleteById/{orderId}")
+    public ResponseEntity<String> deleteOrderById(@PathVariable Long orderId) throws OrderNotFoundException {
+
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.deleteOrderById(orderId));
+    }
 }
