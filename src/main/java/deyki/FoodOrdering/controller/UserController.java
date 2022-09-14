@@ -56,4 +56,10 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Details updated successfully!");
     }
+
+    @GetMapping("/getPointsByUserId/{userId}")
+    public ResponseEntity<String> getPointsById(@PathVariable Long userId) throws UserProfileDetailsNotFoundException {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userProfileDetailsService.getPointsById(userId));
+    }
 }
