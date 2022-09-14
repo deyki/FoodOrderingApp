@@ -295,4 +295,16 @@ public class OrderServiceImpl implements OrderService {
 
         return modelMapper.map(order.getUser(), UserResponseModel.class);
     }
+
+    @Override
+    public String deleteOrderById(Long orderId) throws OrderNotFoundException {
+
+        Order order = orderRepository
+                .findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id: %d not found!", orderId)));
+
+        orderRepository.deleteById(order.getOrderId());
+
+        return String.format("Order with id: %d deleted!", orderId);
+    }
 }

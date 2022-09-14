@@ -47,4 +47,6 @@ public interface OrderService {
     void updateActiveById(Long orderId) throws OrderNotFoundException;
 
     UserResponseModel getUserInfoByOrderId(Long orderId) throws OrderNotFoundException;
+
+    String deleteOrderById(Long orderId) throws OrderNotFoundException;
 }
