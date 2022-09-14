@@ -1,9 +1,12 @@
 package deyki.FoodOrdering.service.impl;
 
 import com.google.common.collect.Sets;
+import deyki.FoodOrdering.domain.bindingModel.user.NewPasswordBindingModel;
+import deyki.FoodOrdering.domain.bindingModel.user.NewUsernameBindingModel;
 import deyki.FoodOrdering.domain.bindingModel.user.UserBindingModel;
 import deyki.FoodOrdering.domain.entity.User;
 import deyki.FoodOrdering.domain.responseModel.user.LoginResponseModel;
+import deyki.FoodOrdering.error.IncorrectPasswordException;
 import deyki.FoodOrdering.error.UserNotFoundException;
 import deyki.FoodOrdering.repository.UserRepository;
 import deyki.FoodOrdering.security.JWTUtil;
@@ -72,13 +75,52 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public LoginResponseModel login(UserBindingModel userBindingModel) throws UserNotFoundException {
+    public LoginResponseModel login(UserBindingModel userBindingModel) throws UserNotFoundException, IncorrectPasswordException {
 
         User user = userRepository.findByUsername(userBindingModel.getUsername())
                 .orElseThrow(() -> new UserNotFoundException(String.format("User %s not found!", userBindingModel.getUsername())));
 
-        String token = jwtUtil.generateToken(user.getUsername());
+        if (user.getPassword().equals(userBindingModel.getPassword())) {
 
-        return new LoginResponseModel(token);
+            String token = jwtUtil.generateToken(user.getUsername());
+
+            return new LoginResponseModel(token);
+
+        } else {
+
+            throw new IncorrectPasswordException("Incorrect password!");
+        }
+    }
+
+    @Override
+    public String updateUsernameById(Long userId, NewUsernameBindingModel newUsernameBindingModel) throws UserNotFoundException {
+
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
+
+        user.setUsername(newUsernameBindingModel.getUsername());
+
+        userRepository.save(user);
+
+        return String.format("New username: %s", newUsernameBindingModel.getUsername());
+    }
+
+    @Override
+    public String updatePasswordById(Long userId, NewPasswordBindingModel newPasswordBindingModel) throws UserNotFoundException, IncorrectPasswordException {
+
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found!", userId)));
+
+        if (user.getPassword().equals(newPasswordBindingModel.getOldPassword())) {
+
+            user.setPassword(bCryptPasswordEncoder.encode(newPasswordBindingModel.getNewPassword()));
+
+            return "Your password is successfully changed!";
+        } else {
+
+            throw new IncorrectPasswordException("Incorrect old password!");
+        }
     }
 }
