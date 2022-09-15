@@ -34,4 +34,10 @@ public class MenuController {
 
         return ResponseEntity.status(HttpStatus.OK).body(menuService.getMenu());
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteMenu() throws MenuNotInitializedException {
+
+        return ResponseEntity.status(HttpStatus.OK).body(menuService.deleteMenu());
+    }
 }
