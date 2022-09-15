@@ -161,4 +161,10 @@ public class OrderController {
 
         return ResponseEntity.status(HttpStatus.OK).body(orderService.deleteOrderById(orderId));
     }
+
+    @GetMapping("/getDeliveryAddressById/{orderId}")
+    public ResponseEntity<DeliveryAddressResponseModel> getDeliveryAddressById(@PathVariable Long orderId) throws OrderNotFoundException {
+
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getDeliveryAddressByOrderId(orderId));
+    }
 }
