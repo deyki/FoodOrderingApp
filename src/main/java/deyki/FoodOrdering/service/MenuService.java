@@ -9,4 +9,6 @@ public interface MenuService {
     void initMenu() throws MenuAlreadyInitializedException;
 
     MenuResponseModel getMenu() throws MenuNotInitializedException;
+
+    String deleteMenu() throws MenuNotInitializedException;
 }
