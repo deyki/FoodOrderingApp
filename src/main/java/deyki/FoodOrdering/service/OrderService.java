@@ -49,4 +49,6 @@ public interface OrderService {
     UserResponseModel getUserInfoByOrderId(Long orderId) throws OrderNotFoundException;
 
     String deleteOrderById(Long orderId) throws OrderNotFoundException;
+
+    DeliveryAddressResponseModel getDeliveryAddressByOrderId(Long orderId) throws OrderNotFoundException;
 }

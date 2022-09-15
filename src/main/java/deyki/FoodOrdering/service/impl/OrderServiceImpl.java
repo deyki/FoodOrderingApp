@@ -307,4 +307,14 @@ public class OrderServiceImpl implements OrderService {
 
         return String.format("Order with id: %d deleted!", orderId);
     }
+
+    @Override
+    public DeliveryAddressResponseModel getDeliveryAddressByOrderId(Long orderId) throws OrderNotFoundException {
+
+        Order order = orderRepository
+                .findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id: %d not found!", orderId)));
+
+        return new DeliveryAddressResponseModel(order.getDeliveryAddress());
+    }
 }
