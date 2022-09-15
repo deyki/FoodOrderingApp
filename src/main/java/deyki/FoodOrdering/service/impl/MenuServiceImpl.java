@@ -44,6 +44,18 @@ public class MenuServiceImpl implements MenuService {
 
         return modelMapper.map(menu, MenuResponseModel.class);
     }
+
+    @Override
+    public String deleteMenu() throws MenuNotInitializedException {
+
+        Menu menu = menuRepository
+                .findByName("Main menu")
+                .orElseThrow(() -> new MenuNotInitializedException("Main menu is not initialized!"));
+
+        menuRepository.delete(menu);
+
+        return "Main menu is deleted!";
+    }
 }
 
 
