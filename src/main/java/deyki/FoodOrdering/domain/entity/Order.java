@@ -33,6 +33,9 @@ public class Order {
     @Column(name = "active")
     private Boolean active;
 
+    @Column(name = "paid")
+    private Boolean paid;
+
     @Column(name = "name")
     private String drink;
 
