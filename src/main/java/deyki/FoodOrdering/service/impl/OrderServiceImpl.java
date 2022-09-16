@@ -50,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = modelMapper.map(fullOrderBindingModel, Order.class);
         order.setUser(user);
         order.setActive(true);
+        order.setPaid(false);
         order.setOrderType(OrderType.FullOrder);
 
         userProfileDetailsRepository.save(userProfileDetails);
@@ -69,6 +70,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = modelMapper.map(mixedOrderBindingModel, Order.class);
         order.setActive(true);
+        order.setPaid(false);
         order.setUser(user);
         order.setOrderType(OrderType.MixedOrder);
 
@@ -90,6 +92,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = modelMapper.map(drinkOrderBindingModel, Order.class);
         order.setUser(user);
         order.setActive(true);
+        order.setPaid(false);
         order.setOrderType(OrderType.DrinkOrder);
 
         userProfileDetailsRepository.save(userProfileDetails);
@@ -109,6 +112,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = modelMapper.map(pizzaOrderBindingModel, Order.class);
         order.setActive(true);
+        order.setPaid(false);
         order.setUser(user);
         order.setOrderType(OrderType.PizzaOrder);
 
@@ -129,6 +133,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = modelMapper.map(mainDishOrderBindingModel, Order.class);
         order.setActive(true);
+        order.setPaid(false);
         order.setUser(user);
         order.setOrderType(OrderType.MainDishOrder);
 
@@ -149,6 +154,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = modelMapper.map(saladOrderBindingModel, Order.class);
         order.setActive(true);
+        order.setPaid(false);
         order.setUser(user);
         order.setOrderType(OrderType.SaladOrder);
 
@@ -169,6 +175,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = modelMapper.map(dessertOrderBindingModel, Order.class);
         order.setActive(true);
+        order.setPaid(false);
         order.setUser(user);
         order.setOrderType(OrderType.DessertOrder);
 
@@ -277,13 +284,17 @@ public class OrderServiceImpl implements OrderService {
                 .findById(orderId)
                 .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id: %d not found!", orderId)));
 
-        if (order.getActive().equals(true)) {
+        order.setActive(!order.getActive().equals(true));
+    }
 
-            order.setActive(false);
-        } else {
+    @Override
+    public void updatePaidStatusById(Long orderId) throws OrderNotFoundException {
 
-            order.setActive(true);
-        }
+        Order order = orderRepository
+                .findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id: %d not found!", orderId)));
+
+        order.setPaid(order.getPaid().equals(false));
     }
 
     @Override

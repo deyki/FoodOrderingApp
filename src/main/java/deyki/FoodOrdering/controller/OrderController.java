@@ -150,6 +150,14 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Order %d updated!", orderId));
     }
 
+    @PutMapping("/updatePaidStatusById/{orderId}")
+    public ResponseEntity<String> updatePaidStatusById(@PathVariable Long orderId) throws OrderNotFoundException {
+
+        orderService.updatePaidStatusById(orderId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Order %d paid status updated!", orderId));
+    }
+
     @GetMapping("/getUserByOrderId/{orderId}")
     public ResponseEntity<UserResponseModel> getUserByOrderId(@PathVariable Long orderId) throws OrderNotFoundException {
 
