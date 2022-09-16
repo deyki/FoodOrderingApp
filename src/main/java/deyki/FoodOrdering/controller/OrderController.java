@@ -1,7 +1,6 @@
 package deyki.FoodOrdering.controller;
 
 import deyki.FoodOrdering.domain.bindingModel.order.*;
-import deyki.FoodOrdering.domain.entity.Dessert;
 import deyki.FoodOrdering.domain.entity.Order;
 import deyki.FoodOrdering.domain.responseModel.order.*;
 import deyki.FoodOrdering.domain.responseModel.user.UserResponseModel;
@@ -140,6 +139,12 @@ public class OrderController {
     public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) throws OrderNotFoundException {
 
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrderById(orderId));
+    }
+
+    @GetMapping("/getOrdersByUserId/{orderId}")
+    public ResponseEntity<List<Order>> getOrdersByUserId(@PathVariable Long userId) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByUserId(userId));
     }
 
     @PutMapping("/updateActiveById/{orderId}")

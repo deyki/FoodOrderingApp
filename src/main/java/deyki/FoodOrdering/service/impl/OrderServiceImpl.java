@@ -278,6 +278,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getOrdersByUserId(Long userId) {
+
+        return orderRepository
+                .findAll()
+                .stream()
+                .filter(order -> order.getUser().getUserId().equals(userId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void updateActiveById(Long orderId) throws OrderNotFoundException {
 
         Order order = orderRepository
