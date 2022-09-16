@@ -117,6 +117,8 @@ public class UserServiceImpl implements UserService {
 
             user.setPassword(bCryptPasswordEncoder.encode(newPasswordBindingModel.getNewPassword()));
 
+            userRepository.save(user);
+
             return "Your password is successfully changed!";
         } else {
 
