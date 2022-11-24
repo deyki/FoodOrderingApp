@@ -80,16 +80,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(userBindingModel.getUsername())
                 .orElseThrow(() -> new UserNotFoundException(String.format("User %s not found!", userBindingModel.getUsername())));
 
-        if (user.getPassword().equals(userBindingModel.getPassword())) {
-
-            String token = jwtUtil.generateToken(user.getUsername());
-
-            return new LoginResponseModel(token);
-
-        } else {
-
+        boolean validPassword = bCryptPasswordEncoder.matches(userBindingModel.getPassword(), user.getPassword());
+        if (!validPassword) {
             throw new IncorrectPasswordException("Incorrect password!");
         }
+
+        final String JWToken = jwtUtil.generateToken(user.getUsername());
+        return new LoginResponseModel(JWToken);
     }
 
     @Override
